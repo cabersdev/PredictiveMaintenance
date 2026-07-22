@@ -1,0 +1,136 @@
+# ===============================
+#  GO (Simulatore)
+# ===============================
+# Binari ed eseguibili
+/simulator/simulator
+/simulator/bin/
+/simulator/dist/
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# File di test e coverage
+*.test
+*.out
+
+# Dipendenze (vendor) - se usi vendor
+/simulator/vendor/
+
+# File di debug (se generati da IDE)
+/simulator/debug
+/simulator/__debug_bin
+
+# ===============================
+#  PYTHON (uv, venv, cache)
+# ===============================
+# Virtual environment di uv
+.venv/
+venv/
+ENV/
+env/
+
+# Cache Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.pyd
+
+# File di distribuzione
+*.egg-info/
+*.egg
+dist/
+build/
+*.whl
+
+# Cache di test e coverage
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+.tox/
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.ruff_cache/
+.mypy_cache/
+
+# Cache di Jupyter Notebook
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# ===============================
+#  DATI E VOLUMI LOCALI (Database)
+# ===============================
+# File di database SQLite (locali)
+*.db
+*.sqlite
+*.sqlite3
+
+# Volumi Docker (se montati localmente)
+/timescale_data/
+/postgres_data/
+/kafka_data/
+/zookeeper_data/
+/volumes/
+
+# Dump di database
+*.sql
+*.dump
+
+# ===============================
+#  AMBIENTE E CONFIGURAZIONI
+# ===============================
+# File di ambiente (contengono secret)
+.env
+.env.local
+.env.*.local
+*.env
+
+# File di configurazione IDE (locali)
+.vscode/
+.idea/
+*.iml
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# ===============================
+#  FILE DI BUILD / TMP
+# ===============================
+tmp/
+temp/
+*.tmp
+*.temp
+
+# ===============================
+#  STRUMENTI DI ANALISI STATICA (se generano report)
+# ===============================
+report.html
+coverage.lcov
+
+# ===============================
+#  OS SPECIFICI
+# ===============================
+# Windows
+Desktop.ini
+$RECYCLE.BIN/
+
+# MacOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Linux
+.directory
+*.pid
+*.lock
