@@ -3,7 +3,6 @@ package models
 import "time"
 
 type SensorData struct {
-	ID          string    `json:"id"`
 	MachineID   string    `json:"machine_id"`
 	Timestamp   time.Time `json:"timestamp"`
 	Temperature float64   `json:"temperature"`
