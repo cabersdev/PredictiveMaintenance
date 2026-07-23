@@ -1,4 +1,4 @@
-from pipeline.db.base import Base
+from config.database import Base
 from sqlalchemy import Column, ForeignKey, Float, PrimaryKeyConstraint, DateTime, Boolean, UUID
 from sqlalchemy.orm import relationship
 

@@ -1,6 +1,6 @@
 from sqlalchemy import Column, String, Float, UUID
 from sqlalchemy.orm import relationship
-from pipeline.db.base import Base
+from config.database import Base
 import uuid
 
 class Machine(Base):
