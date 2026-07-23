@@ -27,9 +27,11 @@ def upgrade() -> None:
         sa.Column("hours", sa.Float(), nullable=True),
         sa.Column("degrade", sa.Float(), nullable=True),
         sa.Column("fault_threshold", sa.Float(), nullable=True),
+        sa.Column("created_at", sa.DateTime(timezone=True), server_default=sa.text("now()"), nullable=False),
+        sa.Column("updated_at", sa.DateTime(timezone=True), server_default=sa.text("now()"), nullable=False),
         sa.PrimaryKeyConstraint("id"),
     )
-    op.create_index(op.f("ix_machines_name"), "machines", ["name"], unique=False)
+    op.create_index(op.f("ix_machines_name"), "machines", ["name"], unique=True)
     op.create_index(op.f("ix_machines_location"), "machines", ["location"], unique=False)
 
     op.create_table(

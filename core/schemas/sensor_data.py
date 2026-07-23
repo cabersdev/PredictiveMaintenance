@@ -57,17 +57,6 @@ class SensorDataBase(BaseModel):
             raise ValueError(f'Current must be between 0 and 500 A (got {v})')
         return round(v, 2)
 
-    @field_validator('timestamp')
-    @classmethod
-    def validate_timestamp(cls, v: datetime) -> datetime:
-        """The timestamp cannot be in the future (tolerance 5 seconds)"""
-        now = datetime.now(timezone.utc)
-        if v > now:
-            # Allow a small offset for unsynchronized clocks
-            if (v - now).total_seconds() > 5:
-                raise ValueError(f'Timestamp cannot be more than 5 seconds in the future (got {v})')
-        return v
-
     @field_validator('hours')
     @classmethod
     def validate_hours(cls, v: float) -> float:
@@ -93,12 +82,28 @@ class SensorDataBase(BaseModel):
 
 class SensorDataCreate(SensorDataBase):
     """Input to insert a single raw record (via API or Kafka)"""
-    pass
+
+    @field_validator('timestamp')
+    @classmethod
+    def validate_timestamp(cls, v: datetime) -> datetime:
+        """The timestamp cannot be in the future (tolerance 5 seconds).
+
+        Only enforced on input: this must NOT run on SensorDataOutput, otherwise
+        simply reading back existing rows (get/list) could fail validation.
+        """
+        if v.tzinfo is None:
+            v = v.replace(tzinfo=timezone.utc)
+        now = datetime.now(timezone.utc)
+        if v > now:
+            # Allow a small offset for unsynchronized clocks
+            if (v - now).total_seconds() > 5:
+                raise ValueError(f'Timestamp cannot be more than 5 seconds in the future (got {v})')
+        return v
 
 
 class SensorDataOutput(SensorDataBase):
-    """Output for a raw record (with ID)"""
-    id: UUID = Field(..., description="Unique ID of the record")
+    """Output for a raw record (natural key is machine_id + timestamp, there is no surrogate id)"""
+    pass
 
 
 class SensorDataBatchInput(BaseModel):
